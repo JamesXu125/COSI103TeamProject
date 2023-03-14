@@ -38,9 +38,13 @@ def home():
         <h1>About</h1>
         <a href="{url_for('about')}">About Page</a>
         <h1>Team</h1>
-        <a href="{url_for('team')}">Team Page</a>
+        <h4>The link below will show each of our team member's role in this app.</h4>
+        <a href="{url_for('teamBohan')}">Bohan Lin</a>
         <h1>Index</h1>
-        <a href="{url_for('index')}">Index Page</a>
+        <h4>The link below will direct to each of our team member's page.</h4>
+        <a href="{url_for('indexBohan')}">Bohan Lin</a>
+        <h1>Form</h1>
+        <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a>
     '''
 
 
@@ -77,29 +81,22 @@ def gptdemo():
 def about():
     print('processing /about route')
     return f'''
-
+    <h1> Fix Mistake Demo</h1>
+    <p> This demo can get a prompt from the user and then 
+            send to the GPT to fix the spelling mistake and send it back.</p>
     '''
 
-@app.route('/team')
-def team():
-    print('processing /team route')
+@app.route('/team/bohan')
+def teamBohan():
+    print('processing /team/bohan route')
     return f'''
-
+    <h1> Bohan Lin</h1>
+    <p> In charge of the "Fix Mistake Demo" in this app and also directing the route in flask app</p>
     '''
-
-
-@app.route('/index')
-def index():
-    print('processing /index route')
-    return f'''
-        <h1>Bohan Lin</h1>
-        <a href="{url_for('bohan')}">Bohan Lin</a>
-    '''
-
 
 @app.route('/index/bohan')
-def bohan():
-    print('processing /bohan route')
+def indexBohan():
+    print('processing index/bohan route')
     return f'''
         <div>
             <h1 style="text-align: center;">Hi, 你好! </h1>
@@ -107,9 +104,38 @@ def bohan():
                 in Brandeis Univerisy. This is my last semester and I really enjoy studying here.</p>
         </div>
         <div style="text-align: center;">
-            <a href="https://github.com/bohan0lin">github link</a>
+            <a href="https://github.com/bohan0lin">github link</a><br />
+            <a href="{url_for('home')}">home</a>
         </div>
     '''
+
+@app.route('/fixMistakes', methods = ['GET', 'POST'])
+def fixMistakes():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.fixMistakes(prompt)
+        return f'''
+        <h1>Fix Mistake Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('fixMistakes')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>Fix Mistake Demo App</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
