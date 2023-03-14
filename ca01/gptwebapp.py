@@ -43,7 +43,8 @@ def home():
         <a href="{url_for('teamAochan')}">Ao Chan</a>
         <h1>Index</h1>
         <h4>The link below will direct to each of our team member's page.</h4>
-        <a href="{url_for('indexBohan')}">Bohan Lin</a>
+        <a href="{url_for('indexBohan')}">Bohan Lin</a><br />
+        <a href="https://srautogroupma.com/">Ao Chan</a>
         <h1>Form</h1>
         <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a><br />
         <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a>
@@ -122,6 +123,7 @@ def indexBohan():
             <a href="{url_for('home')}">home</a>
         </div>
     '''
+
 
 @app.route('/fixMistakes', methods = ['GET', 'POST'])
 def fixMistakes():
