@@ -29,12 +29,18 @@ gptAPI = GPT(os.environ.get('APIKEY'))
 app.secret_key = b'_5#y2L"F4Q789789uioujkkljkl...8z\n\xec]/'
 
 @app.route('/')
-def index():
+def home():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <h1>About</h1>
+        <a href="{url_for('about')}">About Page</a>
+        <h1>Team</h1>
+        <a href="{url_for('team')}">Team Page</a>
+        <h1>Index</h1>
+        <a href="{url_for('index')}">Index Page</a>
     '''
 
 
@@ -65,6 +71,45 @@ def gptdemo():
             <p><input type=submit value="get response">
         </form>
         '''
+    
+
+@app.route('/about')
+def about():
+    print('processing /about route')
+    return f'''
+
+    '''
+
+@app.route('/team')
+def team():
+    print('processing /team route')
+    return f'''
+
+    '''
+
+
+@app.route('/index')
+def index():
+    print('processing /index route')
+    return f'''
+        <h1>Bohan Lin</h1>
+        <a href="{url_for('bohan')}">Bohan Lin</a>
+    '''
+
+
+@app.route('/index/bohan')
+def bohan():
+    print('processing /bohan route')
+    return f'''
+        <div>
+            <h1 style="text-align: center;">Hi, 你好! </h1>
+            <p style="text-align: center;">I'm Bohan Lin, currentyly a computer science major student 
+                in Brandeis Univerisy. This is my last semester and I really enjoy studying here.</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://github.com/bohan0lin">github link</a>
+        </div>
+    '''
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
