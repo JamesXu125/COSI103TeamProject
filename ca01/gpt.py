@@ -40,10 +40,21 @@ class GPT():
             n=1,
             stop=None,
             temperature=0.8,
-        )
-
+        )    
         response = completion.choices[0].text
         return response
+
+    def fixMistakes(self,prompt):
+        ''' This method can get a prompt from the user and then 
+            send to the gpt to fix the spelling mistake and send it back.   --Bohan Lin'''
+        edit = openai.Edit.create(
+            model = "text-davinci-edit-001",
+            input = prompt,
+            instruction = "Fix the spelling mistakes"
+        )
+        response = edit.choices[0].text
+        return response
+
 
 if __name__=='__main__':
     '''
@@ -51,3 +62,4 @@ if __name__=='__main__':
     import os
     g = GPT(os.environ.get("APIKEY"))
     print(g.getResponse("what does openai's GPT stand for?"))
+    # print(g.fixMistakes(input('Enter a sentence: ')))
