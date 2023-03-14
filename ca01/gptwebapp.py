@@ -39,12 +39,15 @@ def home():
         <a href="{url_for('about')}">About Page</a>
         <h1>Team</h1>
         <h4>The link below will show each of our team member's role in this app.</h4>
-        <a href="{url_for('teamBohan')}">Bohan Lin</a>
+        <a href="{url_for('teamBohan')}">Bohan Lin</a><br />
+        <a href="{url_for('teamAochan')}">Ao Chan</a>
         <h1>Index</h1>
         <h4>The link below will direct to each of our team member's page.</h4>
         <a href="{url_for('indexBohan')}">Bohan Lin</a>
         <h1>Form</h1>
-        <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a>
+        <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a><br />
+        <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a>
+
     '''
 
 
@@ -84,6 +87,10 @@ def about():
     <h1> Fix Mistake Demo</h1>
     <p> This demo can get a prompt from the user and then 
             send to the GPT to fix the spelling mistake and send it back.</p>
+    <h1> Translate to Chinese Demo</h1>
+    <p> This demo can translate the input to Chinese from any
+            language and send it back.</p>
+
     '''
 
 @app.route('/team/bohan')
@@ -92,6 +99,13 @@ def teamBohan():
     return f'''
     <h1> Bohan Lin</h1>
     <p> In charge of the "Fix Mistake Demo" in this app and also directing the route in flask app</p>
+    '''
+@app.route('/team/aochan')
+def teamAochan():
+    print('processing /team/aochan route')
+    return f'''
+    <h1> Ao Chan</h1>
+    <p> Responsible for the method of 'translate to Chinense'</p>
     '''
 
 @app.route('/index/bohan')
@@ -130,6 +144,33 @@ def fixMistakes():
     else:
         return '''
         <h1>Fix Mistake Demo App</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+    
+@app.route('/translateToChinese', methods = ['GET', 'POST'])
+def translateToChinese():
+    ''' translate a prompt in any language to Chinese
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.translateToChinese(prompt)
+        return f'''
+        <h1>Translate To Chinese Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('translateToChinese')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>Translate To Chinese Demo App</h1>
         Enter your query below
         <form method="post">
             <textarea name="prompt"></textarea>
