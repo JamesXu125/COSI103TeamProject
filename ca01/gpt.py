@@ -55,6 +55,17 @@ class GPT():
         response = edit.choices[0].text
         return response
 
+    def translateToChinese(self,prompt):
+        '''This method can translate the prompt into Chinese no matter what
+           language the prompt is and return it back.   --Ao Chan'''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt = "Translate the following to Chinese:"+prompt,
+            n=1,
+            temperature=0.8,
+        )
+        response = completion.choices[0].text
+        return response
 
 if __name__=='__main__':
     '''
@@ -62,4 +73,5 @@ if __name__=='__main__':
     import os
     g = GPT(os.environ.get("APIKEY"))
     print(g.getResponse("what does openai's GPT stand for?"))
+    #print(g.translateToChinese(input("Enter a sentence to translate to Chinese:")))
     # print(g.fixMistakes(input('Enter a sentence: ')))
