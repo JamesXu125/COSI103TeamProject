@@ -66,13 +66,27 @@ class GPT():
         )
         response = completion.choices[0].text
         return response
+    
+    def comment_f(self,prompt):
+        '''This method asks ChatGPT to comment a python function --Ziming Xu'''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt = "Comment the following python function"+prompt,
+            n=1,
+            temperature=0.8,
+            stop = None,
+            max_tokens = 1024
+        )
+        response = completion.choices[0].text
+        return response
 
 if __name__=='__main__':
     '''
     '''
     import os
     g = GPT(os.environ.get("APIKEY"))
+    # print(g.getResponse("what does openai GPT stand for?"))
 
-    print(g.getResponse("what does openai's GPT stand for?"))
+    print(g.comment_f(input('Enter a python function that you want to comment:')))
     #print(g.translateToChinese(input("Enter a sentence to translate to Chinese:")))
     # print(g.fixMistakes(input('Enter a sentence: ')))
