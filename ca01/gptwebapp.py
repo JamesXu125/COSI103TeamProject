@@ -42,15 +42,18 @@ def home():
         <a href="{url_for('teamBohan')}">Bohan Lin</a><br />
         <a href="{url_for('teamAochan')}">Ao Chan</a><br />
         <a href="{url_for('teamHangliao')}">Hang Liao</a><br />
+        <a href="{url_for('teamZiming')}">Ziming Xu</a>
         <h1>Index</h1>
         <h4>The link below will direct to each of our team member's page.</h4>
         <a href="{url_for('indexBohan')}">Bohan Lin</a><br />
         <a href="https://srautogroupma.com/">Ao Chan</a><br />
         <a href="{url_for('indexHangliao')}">Hang Liao</a><br />
+        <a href="{url_for('indexZiming')}">Ziming Xu</a>
         <h1>Form</h1>
         <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a><br />
         <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a><br />
         <a href="{url_for('summarize_text')}">Summarize Text Demo</a><br />
+        <a href="{url_for('comment_function')}">Comment a simple python function Demo</a>
 
     '''
 
@@ -94,10 +97,10 @@ def about():
     <h1> Translate to Chinese Demo</h1>
     <p> This demo can translate the input to Chinese from any
             language and send it back.</p>
-    <h1> Summarize text Demo</h1>
-    <p> This demo can summarize a input and send it back.</p>
-
+    <h1> Comment Function Demo </h1>
+    <p> This demo can comment a given python function. </p>
     '''
+
 
 @app.route('/team/bohan')
 def teamBohan():
@@ -122,6 +125,13 @@ def teamHangliao():
     <p> Write and add the method 'summarize_text</p>
     '''
 
+@app.route('/team/Ziming')
+def teamZiming():
+    print('processing /team/Ziming route')
+    return f'''
+    <h1> Ziming Xu</h1>
+    <p> Responsible for the method of 'Comment python function'</p>
+    '''
 
 @app.route('/index/bohan')
 def indexBohan():
@@ -155,6 +165,19 @@ def indexHangliao():
         </div>
     '''
 
+@app.route('/index/Ziming')
+def indexZiming():
+    print('processing index/Ziming route')
+    return f'''
+    <h1 style="text-align: center;">Hi, </h1>
+    <p style="text-align: center;"> My name is Ziming Xu, and I am a senior minoring in computer science. 
+    I learned a lot of useful tools in this class :) </p>
+    <div style="text-align: center;">
+        <a href="https://github.com/JamesXu125">Github Link</a>
+        <br/>
+        <a href="{url_for('home')}">Back to Home</a>
+    </div>
+    '''
 
 @app.route('/fixMistakes', methods = ['GET', 'POST'])
 def fixMistakes():
@@ -236,7 +259,33 @@ def summarize_text():
         </form>
         '''
 
-
+@app.route('/comment_function', methods = ['GET', 'POST'])
+def comment_function():
+    ''' Comment a given python function
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.comment_f(prompt)
+        return f'''
+        <h1>Comment a Python function Demo</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('comment_function')}> Comment another function</a>
+        '''
+    else:
+        return '''
+        <h1>Comment a Python function App</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+    
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)
