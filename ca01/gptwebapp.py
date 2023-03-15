@@ -40,14 +40,17 @@ def home():
         <h1>Team</h1>
         <h4>The link below will show each of our team member's role in this app.</h4>
         <a href="{url_for('teamBohan')}">Bohan Lin</a><br />
-        <a href="{url_for('teamAochan')}">Ao Chan</a>
+        <a href="{url_for('teamAochan')}">Ao Chan</a><br />
+        <a href="{url_for('teamHangliao')}">Hang Liao</a><br />
         <h1>Index</h1>
         <h4>The link below will direct to each of our team member's page.</h4>
         <a href="{url_for('indexBohan')}">Bohan Lin</a><br />
-        <a href="https://srautogroupma.com/">Ao Chan</a>
+        <a href="https://srautogroupma.com/">Ao Chan</a><br />
+        <a href="{url_for('indexHangliao')}">Hang Liao</a><br />
         <h1>Form</h1>
         <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a><br />
-        <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a>
+        <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a><br />
+        <a href="{url_for('summarize_text')}">Summarize Text Demo</a><br />
 
     '''
 
@@ -109,6 +112,15 @@ def teamAochan():
     <p> Responsible for the method of 'translate to Chinense'</p>
     '''
 
+@app.route('/team/hangliao')
+def teamHangliao():
+    print('processing /team/Hangliao route')
+    return f'''
+    <h1> Hang Liao</h1>
+    <p> Write and add the method 'summarize_text</p>
+    '''
+
+
 @app.route('/index/bohan')
 def indexBohan():
     print('processing index/bohan route')
@@ -120,6 +132,23 @@ def indexBohan():
         </div>
         <div style="text-align: center;">
             <a href="https://github.com/bohan0lin">github link</a><br />
+            <a href="{url_for('home')}">home</a>
+        </div>
+    '''
+
+
+@app.route('/index/hangliao')
+def indexHangliao():
+    print('processing index/hangliao route')
+    return f'''
+        <div>
+            <h1 style="text-align: center;">Hiiiiii! </h1>
+            <p style="text-align: center;">I'm Hang Liao, currentyly a Econ major & Computer Science major student 
+                in Brandeis Univerisy. I am a junior.</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://github.com/heathlh">github link</a><br />
+            <a href="https://www.linkedin.com/in/hang-liao-3a6ab9224/">linkedin page</a><br />
             <a href="{url_for('home')}">home</a>
         </div>
     '''
@@ -180,6 +209,33 @@ def translateToChinese():
         </form>
         '''
 
+@app.route('/summarize_text', methods = ['GET', 'POST'])
+def summarize_text():
+    ''' Handle GET requests by sending a form and POST requests by returning a summary of the input text '''
+    if request.method == 'POST':
+        input_text = request.form['input_text']
+        summary = gptAPI.summarize(input_text)
+        return f'''
+        <h1>Text Summarizer</h1>
+        <h3>Original Text</h3>
+        <pre style="bgcolor:yellow">{input_text}</pre>
+        <hr>
+        <h3>Summary</h3>
+        <div style="border:thin solid black">{summary}</div>
+        <a href={url_for('summarize_text')}> Summarize Another Text</a>
+        '''
+    else:
+        return '''
+        <h1>Text Summarizer</h1>
+        Enter your text below
+        <form method="post">
+            <textarea name="input_text"></textarea>
+            <p><input type=submit value="Summarize">
+        </form>
+        '''
+
+
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True,port=5001)
+    
