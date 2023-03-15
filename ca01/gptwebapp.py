@@ -94,6 +94,8 @@ def about():
     <h1> Translate to Chinese Demo</h1>
     <p> This demo can translate the input to Chinese from any
             language and send it back.</p>
+    <h1> Summarize text Demo</h1>
+    <p> This demo can summarize a input and send it back.</p>
 
     '''
 
