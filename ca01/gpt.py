@@ -92,22 +92,22 @@ class GPT():
         return response
     
     def summarize(self,prompt):
-    """Summarize the input text using GPT-3"""
+        """Summarize the input text using GPT-3"""
 
-    # Use the OpenAI GPT-3 API to generate a summary
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=f"Summarize the following text:\n\n{prompt}",
-        max_tokens=100,
-        temperature=0.5,
-        n=1,
-        stop=None,
-        timeout=15,
-    )
+        # Use the OpenAI GPT-3 API to generate a summary
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=f"Summarize the following text:\n\n{prompt}",
+            max_tokens=100,
+            temperature=0.5,
+            n=1,
+            stop=None,
+            timeout=15,
+        )
 
-    # Return the first generated summary
-    summary = response.choices[0].text.strip()
-    return summary
+        # Return the first generated summary
+        summary = response.choices[0].text.strip()
+        return summary
     
 if __name__=='__main__':
     '''
