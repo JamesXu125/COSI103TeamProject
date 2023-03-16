@@ -311,7 +311,7 @@ def comment_function():
             <p><input type=submit value="get response">
         </form>
         '''
-    @app.route('/simplifycode', methods = ['GET', 'POST'])
+@app.route('/simplifycode', methods = ['GET', 'POST'])
 def simplifycode():
     ''' simplifycode the input code
     '''
