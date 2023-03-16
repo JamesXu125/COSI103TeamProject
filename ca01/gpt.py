@@ -79,7 +79,18 @@ class GPT():
         )
         response = completion.choices[0].text
         return response
-
+    
+      def simplifycode(self,prompt):
+        ''' This method will ask ChatGPT to simpify a code   -Zijun Wang'''
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt="simplify this code:"+ prompt,
+            n=1,
+            temperature=0.8,
+        )    
+        response = completion.choices[0].text
+        return response
+    
 if __name__=='__main__':
     '''
     '''
