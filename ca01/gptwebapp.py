@@ -104,7 +104,7 @@ def about():
     <h1> Simplify Code Demo </h1>
     <p> This demo can help to simplify your code. </p>
     <h1> Summarize Text Demo </h1>
-    <p> This demo can help to summarize a paragraph. </p>
+    <p> This demo can help to summarize a paragraph. </p> 
     '''
 
 
