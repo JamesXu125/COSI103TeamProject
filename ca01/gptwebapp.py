@@ -42,17 +42,20 @@ def home():
         <a href="{url_for('teamBohan')}">Bohan Lin</a><br />
         <a href="{url_for('teamAochan')}">Ao Chan</a><br />
         <a href="{url_for('teamHangliao')}">Hang Liao</a><br />
+        <a href="{url_for('teamZijun')}">Zijun Wang</a><br />
         <a href="{url_for('teamZiming')}">Ziming Xu</a>
         <h1>Index</h1>
         <h4>The link below will direct to each of our team member's page.</h4>
         <a href="{url_for('indexBohan')}">Bohan Lin</a><br />
         <a href="https://srautogroupma.com/">Ao Chan</a><br />
         <a href="{url_for('indexHangliao')}">Hang Liao</a><br />
+        <a href="{url_for('indexZijun')}">Zijun Wang</a><br />
         <a href="{url_for('indexZiming')}">Ziming Xu</a>
         <h1>Form</h1>
         <a href="{url_for('fixMistakes')}">Fix Mistake Demo</a><br />
         <a href="{url_for('translateToChinese')}">Translate To Chinese Demo</a><br />
         <a href="{url_for('summarize_text')}">Summarize Text Demo</a><br />
+        <a href="{url_for('simplifycode')}">Simplify Code Demo</a><br />
         <a href="{url_for('comment_function')}">Comment a simple python function Demo</a>
 
     '''
@@ -99,6 +102,8 @@ def about():
             language and send it back.</p>
     <h1> Comment Function Demo </h1>
     <p> This demo can comment a given python function. </p>
+    <h1> Simplify Code Demo </h1>
+    <p> This demo can help to simplify your code. </p>
     '''
 
 
@@ -131,6 +136,13 @@ def teamZiming():
     return f'''
     <h1> Ziming Xu</h1>
     <p> Responsible for the method of 'Comment python function'</p>
+    '''
+@app.route('/team/Zijun')
+def teamZijun():
+    print('processing /team/Zijun route')
+    return f'''
+    <h1> Zijun Wang</h1>
+    <p> Responsible for the method of 'Simplify Code'</p>
     '''
 
 @app.route('/index/bohan')
@@ -177,6 +189,20 @@ def indexZiming():
         <br/>
         <a href="{url_for('home')}">Back to Home</a>
     </div>
+    '''
+
+@app.route('/index/zijun')
+def indexZijun():
+    print('processing index/zijun route')
+    return f'''
+        <div>
+            <h1 style="text-align: center;">Hi :D </h1>
+            <p style="text-align: center;">I'm Zijun Wang, and I'm a sophomore, prearing to declare CS major</p>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://github.com/zijunwang20">my github link</a><br />
+            <a href="{url_for('home')}">back to home</a>
+        </div>
     '''
 
 @app.route('/fixMistakes', methods = ['GET', 'POST'])
@@ -285,6 +311,33 @@ def comment_function():
             <p><input type=submit value="get response">
         </form>
         '''
+    @app.route('/simplifycode', methods = ['GET', 'POST'])
+def simplifycode():
+    ''' simplifycode the input code
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.simplifycode(prompt)
+        return f'''
+        <h1>simplifycode</h1>
+        <pre style="bgcolor:yellow">{prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{answer}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{answer}</pre>
+        <a href={url_for('simplifycode')}> make another query</a>
+        '''
+    else:
+        return '''
+        <h1>simplify a code</h1>
+        Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+    
     
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
