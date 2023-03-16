@@ -89,7 +89,6 @@ def gptdemo():
         </form>
         '''
     
-
 @app.route('/about')
 def about():
     print('processing /about route')
@@ -104,6 +103,8 @@ def about():
     <p> This demo can comment a given python function. </p>
     <h1> Simplify Code Demo </h1>
     <p> This demo can help to simplify your code. </p>
+    <h1> Summarize Text Demo </h1>
+    <p> This demo can help to summarize a paragraph. </p>
     '''
 
 
