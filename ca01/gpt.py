@@ -87,6 +87,8 @@ class GPT():
             prompt="simplify this code:"+ prompt,
             n=1,
             temperature=0.8,
+            stop = None,
+            max_tokens = 1024
         )    
         response = completion.choices[0].text
         return response
