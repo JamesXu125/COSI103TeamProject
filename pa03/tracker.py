@@ -20,7 +20,7 @@ def main():
             break
         elif choice == "6":
             transaction_id = input("Enter transaction id: ")
-            transaction.delete_transaction(transaction_id)
+            delete_transaction_by_item_num(transaction_id)
         elif choice == "7":
             summary = transaction.summarize_by_date()
             print("Summary by date:")
