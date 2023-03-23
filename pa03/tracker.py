@@ -19,10 +19,24 @@ def main():
         if choice == "0":
             break
             
+        elif choice == "4":
+            trs = transaction.show_transactions()
+            print("Here are all the transactions:\n", trs)
+        
+        elif choice == "5":
+            item_num = input("Enter the item number of the transaction to be added: ")
+            amount = input("Enter the amount of transaction to be added: ")
+            category = input("Enter the category of transaction to be added: ")
+            date = input("Enter the date of transaction to be added: ")
+            description = input("Enter the description of transaction to be added: ")
+            trs = (item_num, amount, category, date, description)
+            transaction.add_transaction(trs)
+            print("Transaction ",trs, " has been added!")
             
         elif choice == "6":
             transaction_id = input("Enter transaction id: ")
             delete_transaction_by_item_num(transaction_id)
+
         elif choice == "7":
             summary = transaction.summarize_by_date()
             print("Summary by date:")

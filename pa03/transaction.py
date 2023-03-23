@@ -11,10 +11,6 @@ class Transaction:
                             date TEXT,
                             description TEXT)''')
         self.conn.commit()
-
-    def get_all_transactions(self):
-        self.cursor.execute('''SELECT * FROM transactions''')
-        return self.cursor.fetchall()
     
     def get_transaction_by_item_num(self, item):
         self.cursor.execute('''SELECT * FROM transactions WHERE item_num=?''', (item,))
@@ -24,6 +20,12 @@ class Transaction:
         self.cursor.execute('''SELECT * FROM transactions WHERE category=?''', (category,))
         return self.cursor.fetchall()
     
+    # show all the transactions --Ziming
+    def show_transactions(self):
+        self.cursor.execute('''SELECT * FROM transactions''')
+        return self.cursor.fetchall()
+    
+    # add a transaction with all features as inputs --Ziming 
     def add_transaction(self, item_num, amount, category, date, description):
         self.cursor.execute('''INSERT INTO transactions
                             (item_num, amount, category, date, description)
