@@ -34,3 +34,8 @@ class Transaction:
     def delete_transaction_by_item_num(self, item):
         self.cursor.execute('''DELETE FROM transactions WHERE item_num=?''', (item,))
         self.conn.commit()
+        
+    def summarize_by_date(self):
+        self.cursor.execute('SELECT date, SUM(amount) FROM transactions GROUP BY date')
+        summary = self.cursor.fetchall()
+        return summary
