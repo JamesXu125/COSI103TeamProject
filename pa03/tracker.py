@@ -18,6 +18,8 @@ def main():
     while True:
         if choice == "0":
             break
+            
+            
         elif choice == "6":
             transaction_id = input("Enter transaction id: ")
             delete_transaction_by_item_num(transaction_id)
@@ -26,3 +28,9 @@ def main():
             print("Summary by date:")
             for s in summary:
             print(f"{s['date']}: {s['total']}")
+            
+            
+        elif choice == "11":
+            show_menu()
+        else:
+            print("Invalid choice")
