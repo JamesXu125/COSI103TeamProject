@@ -15,7 +15,8 @@ class Transaction:
 
     def get_all_transactions(self):
         return self.runQuery('''SELECT * FROM transactions''',())
-    
+    def summarize_by_category(self):
+        return self.runQuery('''SELECT * FROM transactions GROUP BY category''',())
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con = sqlite3.connect(self.db_path)
