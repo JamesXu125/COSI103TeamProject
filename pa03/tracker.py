@@ -41,7 +41,16 @@ def main():
             print("Summary by date:")
             for s in summary:
                 print(f"{s['date']}: {s['total']}")
-            
+        elif choice == "8":
+            month_summary = transaction.summarize_transaction_by_month()
+            print("Summary transaction by month")
+            for r in month_summary:
+                print(f"{r['month']}: {r['total']}")
+        elif choice == "9":
+            year_summary = transaction.summarize_transaction_by_year()
+            print("Summary transaction by year")
+            for r in year_summary:
+                print(f"{r['year']}: {r['total']}")
             
         elif choice == "11":
             show_menu()
