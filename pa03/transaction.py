@@ -1,43 +1,32 @@
 import sqlite3
 
 class Transaction:
-    def __init__(self, db_file):
-        self.conn = sqlite3.connect(db_file)
-        self.cursor = self.conn.cursor()
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS transactions
+    def __init__(self, db_path):
+        self.db_path = db_path
+        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
                             (item_num INTEGER,
                             amount REAL,
                             category TEXT,
                             date TEXT,
-                            description TEXT)''')
-        self.conn.commit()
-    
-    def get_transaction_by_item_num(self, item):
-        self.cursor.execute('''SELECT * FROM transactions WHERE item_num=?''', (item,))
-        return self.cursor.fetchone()
-    
-    def get_transactions_by_category(self, category):
-        self.cursor.execute('''SELECT * FROM transactions WHERE category=?''', (category,))
-        return self.cursor.fetchall()
-    
-    # show all the transactions --Ziming
-    def show_transactions(self):
-        self.cursor.execute('''SELECT * FROM transactions''')
-        return self.cursor.fetchall()
-    
-    # add a transaction with all features as inputs --Ziming 
-    def add_transaction(self, item_num, amount, category, date, description):
-        self.cursor.execute('''INSERT INTO transactions
-                            (item_num, amount, category, date, description)
-                            VALUES (?, ?, ?, ?, ?)''',
-                            (item_num, amount, category, date, description))
-        self.conn.commit()
+                            description TEXT)''',())
 
-    def delete_transaction_by_item_num(self, item):
-        self.cursor.execute('''DELETE FROM transactions WHERE item_num=?''', (item,))
-        self.conn.commit()
-        
-    def summarize_by_date(self):
-        self.cursor.execute('SELECT date, SUM(amount) FROM transactions GROUP BY date')
-        summary = self.cursor.fetchall()
-        return summary
+    def get_all_transactions(self):
+        return self.runQuery('''SELECT * FROM transactions''',())
+    
+    def runQuery(self,query,tuple):
+        ''' return all of the uncompleted tasks as a list of dicts.'''
+        con = sqlite3.connect(self.db_path)
+        cur = con.cursor() 
+        cur.execute(query,tuple)
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        return tuples_to_dicts(tuples)
+
+def to_dict(t):
+    transaction = {'item_num': t[0], 'amount': t[1], 'category': t[2], 'date': t[3], 'description': t[4]}
+    return transaction
+
+def tuples_to_dicts(ts):
+    return [to_dict(t) for t in ts]
+
