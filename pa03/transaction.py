@@ -13,6 +13,17 @@ class Transaction:
     def get_all_transactions(self):
         return self.runQuery('''SELECT * FROM transactions''',())
     
+    
+    #summarize the transaction by month, method 8,  --zijun wang
+    def summarize_transaction_by_month(self):
+        self.cursor.execute("SELECT strftime('%m', date) AS month, SUM(amount) FROM transactions GROUP BY month")
+        return self.cursor.fetchall()
+    
+    #summarize the transaction by year, method 9,  --zijun wang
+    def summarize_by_transaction_year(self):
+        self.cursor.execute("SELECT strftime('%Y', date) AS year, SUM(amount) FROM transactions GROUP BY year")
+        return self.cursor.fetchall()
+    
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con = sqlite3.connect(self.db_path)
