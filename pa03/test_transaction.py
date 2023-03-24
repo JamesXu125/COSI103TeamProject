@@ -7,7 +7,8 @@ from transaction import Transaction, to_dict, tuples_to_dicts
 def tuples():
     " create some tuples to put in the database "
     return [(1, 12345, "test", "03/23/2023", "run test 1"), 
-            (2, 3.14, "test", "03/23/2023", "run test 2")
+            (2, 3.14, "test", "03/23/2023", "run test 2"),
+            (3, 37, "not test", "07/21/2021", "description"),
            ]
 
 @pytest.fixture
@@ -45,4 +46,15 @@ def test_getAll(transactions, returned_dicts):
     tc = transactions
     results = tc.get_all_transactions()
     expected = returned_dicts
+    assert results == expected
+
+def test_summarize_by_category(transactions, returned_dicts):
+    categories=[]
+    expected=[]
+    for i in (returned_dicts):
+        if(i.get("category") not in categories):
+            categories.append(i.get("category"))
+            expected.append(i)
+    expected = sorted(expected, key=lambda x: x['category'])
+    results = transactions.summarize_by_category()
     assert results == expected

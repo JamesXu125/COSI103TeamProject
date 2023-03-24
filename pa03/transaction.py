@@ -9,10 +9,14 @@ class Transaction:
                             category TEXT,
                             date TEXT,
                             description TEXT)''',())
+        #self.runQuery('''INSERT INTO transactions VALUES (1, 12345, 'test', '03/23/2023', 'run test 1')''',())
+        #self.runQuery('''INSERT INTO transactions VALUES (2, 3.14, 'test', '03/23/2023', 'run test 2')''',())
+        #self.runQuery('''INSERT INTO transactions VALUES (3, 37, 'not test', '07/21/2021', 'description')''',())
 
     def get_all_transactions(self):
         return self.runQuery('''SELECT * FROM transactions''',())
-    
+    def summarize_by_category(self):
+        return self.runQuery('''SELECT * FROM transactions GROUP BY category''',())
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con = sqlite3.connect(self.db_path)

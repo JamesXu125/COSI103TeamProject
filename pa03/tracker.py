@@ -30,7 +30,7 @@ def main():
         elif choice == "3":
             print()
         elif choice == "4":
-            print(transaction.get_all_transactions)
+            print(transaction.get_all_transactions())
         elif choice == "5":
             print()
         elif choice == "6":
@@ -41,7 +41,10 @@ def main():
             print("Summary by date:")
             for s in summary:
                 print(f"{s['date']}: {s['total']}")
-            
+        elif choice == "10":
+            summary = transaction.summarize_by_category()
+            print("Summarize by category: ")
+            print(summary)
             
         elif choice == "11":
             show_menu()
