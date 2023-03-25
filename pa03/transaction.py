@@ -28,6 +28,17 @@ class Transaction:
     def delete_transaction(self, item_num):
         return self.runQuery('''DELETE FROM transactions WHERE item_num=?''', (item_num,))
     
+    #summarize the transaction by date, method 7,  --hangliao
+    def summarize_transaction_by_date(self):
+        self.cursor.execute("SELECT strftime('%D', date) AS date, SUM(amount) FROM transactions GROUP BY date")
+        return self.cursor.fetchall()
+    def summarize_by_date(self):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('SELECT date, SUM(amount) FROM transactions GROUP BY date')
+        results = cursor.fetchall()
+        return [{"date": date, "total_amount": amount} for date, amount in results]
+    
     #summarize the transaction by month, method 8,  --zijun wang
     def summarize_transaction_by_month(self):
         self.cursor.execute("SELECT strftime('%m', date) AS month, SUM(amount) FROM transactions GROUP BY month")
