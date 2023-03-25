@@ -32,7 +32,14 @@ def main():
         elif choice == "4":
             print(transaction.get_all_transactions())
         elif choice == "5":
-            print()
+            item = {}
+            item['item_num'] = input("Enter the item number of transaction to be added: ")
+            item['amount'] = input("Enter the amount of transaction to be added: ")
+            item['category'] = input("Enter the category of transaction to be added: ")
+            item['date'] = input("Enter the date of transaction to be added: ")
+            item['description'] = input("Enter the description of transaction to be added: ")
+            transaction.add_transaction(item)
+            print("A transaction is added!")
         elif choice == "6":
             transaction_id = input("Enter transaction id: ")
             transaction.delete_transaction_by_item_num(transaction_id)

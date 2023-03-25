@@ -48,6 +48,16 @@ def test_getAll(transactions, returned_dicts):
     expected = returned_dicts
     assert results == expected
 
+def test_add(transactions, tuples):
+    tc = transactions
+    test_tuple = tuples
+    add_t = (5, 125, "add_test", "03/23", "run test 5")
+    test_tuple.append(add_t)
+    tc.add_transaction(to_dict(add_t))
+    expected = tuples_to_dicts(test_tuple)
+    results = tc.get_all_transactions()
+    assert results == expected
+
 def test_summarize_by_category(transactions, returned_dicts):
     categories=[]
     expected=[]
