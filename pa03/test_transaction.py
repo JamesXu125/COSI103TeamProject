@@ -69,6 +69,7 @@ def test_summarize_by_category(transactions, returned_dicts):
     results = transactions.summarize_by_category()
     assert results == expected
     
+#pytest for delete the transaction by item number, method 6,  --hang liao
 def test_delete_transaction(transactions):
     tc = transactions
     item_num = 1
@@ -77,3 +78,4 @@ def test_delete_transaction(transactions):
     expected = [to_dict(t) for t in [(2, 3.14, "test", "03/23/2023", "run test 2"), 
                                      (3, 37, "not test", "07/21/2021", "description")]]
     assert results == expected
+
