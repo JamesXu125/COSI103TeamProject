@@ -44,10 +44,9 @@ def main():
             transaction_id = input("Enter transaction id: ")
             transaction.delete_transaction_by_item_num(transaction_id)
         elif choice == "7":
-            summary = transaction.summarize_by_date()
-            print("Summary by date:")
-            for s in summary:
-                print(f"{s['date']}: {s['total']}")
+            transactions = transaction.summarize_transaction_by_date()
+            for t in transactions:
+                print(f"{t['date']}: {t['total_amount']}")
         elif choice == "8":
             month_summary = transaction.summarize_transaction_by_month()
             print("Summary transaction by month")
