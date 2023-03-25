@@ -24,6 +24,10 @@ class Transaction:
         return self.runQuery('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(item['item_num'],item['amount'],
         item['category'],item['date'],item['description']))
     
+    #delete the transaction by item number, method 6,  --hang liao
+    def delete_transaction(self, item_num):
+        return self.runQuery('''DELETE FROM transactions WHERE item_num=?''', (item_num,))
+    
     #summarize the transaction by month, method 8,  --zijun wang
     def summarize_transaction_by_month(self):
         self.cursor.execute("SELECT strftime('%m', date) AS month, SUM(amount) FROM transactions GROUP BY month")
