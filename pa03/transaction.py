@@ -38,13 +38,19 @@ class Transaction:
     
     #summarize the transaction by month, method 8,  --zijun wang
     def summarize_transaction_by_month(self):
-        self.cursor.execute("SELECT strftime('%m', date) AS month, SUM(amount) FROM transactions GROUP BY month")
-        return self.cursor.fetchall()
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT substr(date,1,2) || '/' ||substr(date,7,10) AS month,SUM(amount) FROM transactions GROUP BY month")
+        results = cursor.fetchall()
+        return [{"date": date, "total_amount": amount} for date, amount in results]
     
     #summarize the transaction by year, method 9,  --zijun wang
-    def summarize_by_transaction_year(self):
-        self.cursor.execute("SELECT strftime('%Y', date) AS year, SUM(amount) FROM transactions GROUP BY year")
-        return self.cursor.fetchall()
+    def summarize_transaction_by_year(self):
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT substr(date,7,10) AS year, SUM(amount) FROM transactions GROUP BY year")
+        results = cursor.fetchall()
+        return [{"date": date, "total_amount": amount} for date, amount in results]
     
     def runQuery(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
