@@ -93,4 +93,24 @@ def test_summarize_by_date(transactions, returned_dicts):
     results = transactions.summarize_transaction_by_date()
     assert results == expected
 
+    
+#pytest for summarize_transaction_by_year, method 8 -- zijun wang
+def test_summarize_transaction_by_year(transactions):
+    tc = transactions
+    expected = [
+        {"date": "2021", "total_amount": 37},
+        {"date": "2023", "total_amount": 12348.14},
+    ]
+    results = tc.summarize_transaction_by_year()
+    assert results == expected
+
+#pytest for summarize_transaction_by_month, method 9 -- zijun wang
+def test_summarize_transaction_by_month(transactions):
+    tc = transactions
+    expected = [
+        {"date": "03/2023", "total_amount": 12348.14},
+        {"date": "07/2021", "total_amount": 37},
+    ]
+    results = tc.summarize_transaction_by_month()
+    assert results == expected
 
