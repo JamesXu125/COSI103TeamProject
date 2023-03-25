@@ -79,3 +79,18 @@ def test_delete_transaction(transactions):
                                      (3, 37, "not test", "07/21/2021", "description")]]
     assert results == expected
 
+#pytest for summarize the transaction by date, method 7,  --hang liao
+def test_summarize_by_date(transactions, returned_dicts):
+    dates = []
+    expected = []
+    for t in returned_dicts:
+        date = t.get("date")
+        if date not in dates:
+            dates.append(date)
+            total_amount = sum(d.get("amount") for d in returned_dicts if d.get("date") == date)
+            expected.append({"date": date, "total_amount": total_amount})
+    expected = sorted(expected, key=lambda x: x['date'])
+    results = transactions.summarize_by_date()
+    assert results == expected
+
+
