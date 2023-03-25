@@ -42,7 +42,7 @@ def main():
             print("A transaction is added!")
         elif choice == "6":
             transaction_id = input("Enter transaction id: ")
-            transaction.delete_transaction_by_item_num(transaction_id)
+            transaction.delete_transaction(transaction_id)
         elif choice == "7":
             transactions = transaction.summarize_transaction_by_date()
             for t in transactions:
@@ -60,8 +60,6 @@ def main():
         elif choice == "10":
             summary = transaction.summarize_by_category()
             print("Summarize by category: ")
-
-            
         elif choice == "11":
             show_menu()
         else:
