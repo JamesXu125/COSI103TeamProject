@@ -90,7 +90,7 @@ def test_summarize_by_date(transactions, returned_dicts):
             total_amount = sum(d.get("amount") for d in returned_dicts if d.get("date") == date)
             expected.append({"date": date, "total_amount": total_amount})
     expected = sorted(expected, key=lambda x: x['date'])
-    results = transactions.summarize_by_date()
+    results = transactions.summarize_transaction_by_date()
     assert results == expected
 
 
