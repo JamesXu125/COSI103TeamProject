@@ -30,9 +30,6 @@ class Transaction:
     
     #summarize the transaction by date, method 7,  --hangliao
     def summarize_transaction_by_date(self):
-        self.cursor.execute("SELECT strftime('%D', date) AS date, SUM(amount) FROM transactions GROUP BY date")
-        return self.cursor.fetchall()
-    def summarize_by_date(self):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute('SELECT date, SUM(amount) FROM transactions GROUP BY date')
