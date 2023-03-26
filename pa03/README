@@ -36,3 +36,61 @@ Your code has been rated at 9.84/10 (previous run: 9.84/10, +0.00)
 --------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
 
+
+
+Running tracker.py
+
+Here are some options about transaction tracker:
+0. quit
+1. show categories  
+2. add category     
+3. modify category  
+4. show transactions
+5. add transaction  
+6. delete transaction
+7. summarize transactions by date
+8. summarize transactions by month
+9. summarize transactions by year
+10. summarize transactions by category
+11. print this menu
+Enter an option: 4
+[{'item_num': 1, 'amount': 12345.0, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 1, 'amount': 12345.0, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 2, 'amount': 3.14, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 2'}, {'item_num': 3, 'amount': 37.0, 'category': 'not test', 'date': '07/21/2021', 'description': 'description'}, {'item_num': 1, 'amount': 12345.0, 'category': 'test', 
+'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 2, 'amount': 3.14, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 2'}, {'item_num': 3, 'amount': 37.0, 'category': 'not test', 'date': '07/21/2021', 'description': 'description'}, {'item_num': 1, 'amount': 12345.0, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 2, 'amount': 3.14, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 2'}, {'item_num': 3, 'amount': 37.0, 'category': 'not test', 'date': '07/21/2021', 'description': 'description'}, {'item_num': 1, 'amount': 12345.0, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 2, 'amount': 3.14, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 2'}, {'item_num': 3, 'amount': 37.0, 'category': 'not test', 'date': '07/21/2021', 'description': 'description'}]
+Enter another option: 5
+Enter the item number of transaction to be added: 3
+Enter the amount of transaction to be added: 10
+Enter the category of transaction to be added: test1
+Enter the date of transaction to be added: 06/02/2000
+Enter the description of transaction to be added: test1 
+A transaction is added!
+Enter another option: 6
+Enter transaction id: test1
+Enter another option: 7
+03/23/2023: 61737.56
+06/02/2000: 10.0
+07/21/2021: 148.0
+Enter another option: 8
+03/2023: 61737.56
+06/2000: 10.0
+07/2021: 148.0
+Enter another option: 9
+2000: 10.0
+2021: 148.0
+2023: 61737.56
+Enter another option: 10
+Summarize by category: 
+[{'item_num': 3, 'amount': 37.0, 'category': 'not test', 'date': '07/21/2021', 'description': 'description'}, {'item_num': 1, 'amount': 12345.0, 'category': 'test', 'date': '03/23/2023', 'description': 'run test 1'}, {'item_num': 3, 'amount': 10.0, 'category': 'test1', 'date': '06/02/2000', 'description': 'test1'}]      
+Enter another option: 11
+0. quit
+1. show categories
+2. add category
+3. modify category
+4. show transactions
+5. add transaction
+6. delete transaction
+7. summarize transactions by date
+8. summarize transactions by month
+9. summarize transactions by year
+10. summarize transactions by category
+11. print this menu
+Enter another option: 0
