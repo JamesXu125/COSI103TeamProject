@@ -130,7 +130,7 @@ def to_dict(tran):
               - date: str, the date of the transaction in the format YYYY-MM-DD
               - description: str, the description of the transaction
     """
-    transaction = {'item_num': tran[0], 'amount': tran[1], 
+    transaction = {'item_num': tran[0], 'amount': tran[1],
                    'category': tran[2], 'date': tran[3], 'description': tran[4]}
     return transaction
 
@@ -151,5 +151,3 @@ def tuples_to_dicts(trans):
               - description: str, the description of the transaction
     """
     return [to_dict(tran) for tran in trans]
-
-
