@@ -72,7 +72,10 @@ class Transaction:
         """
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        cursor.execute("SELECT substr(date,1,2) || '/' ||substr(date,7,10) AS month,SUM(amount) FROM transactions GROUP BY month")
+        cursor.execute(
+            "SELECT substr(date,1,2) || '/' ||substr(date,7,10) AS month,"
+            "SUM(amount) FROM transactions GROUP BY month"
+            )
         results = cursor.fetchall()
         return [{"date": date, "total_amount": amount} for date, amount in results]
 
@@ -85,7 +88,9 @@ class Transaction:
         """
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        cursor.execute("SELECT substr(date,7,10) AS year, SUM(amount) FROM transactions GROUP BY year")
+        cursor.execute(
+            "SELECT substr(date,7,10) AS year, SUM(amount) FROM transactions GROUP BY year"
+            )
         results = cursor.fetchall()
         return [{"date": date, "total_amount": amount} for date, amount in results]
 
