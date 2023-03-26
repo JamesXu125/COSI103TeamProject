@@ -1,3 +1,6 @@
+'''
+This module implements the transaction class and methods for processing transactions
+'''
 import sqlite3
 
 class Transaction:
@@ -12,7 +15,7 @@ class Transaction:
             db_path (str): The path to the SQLite database file.
         """
         self.db_path = db_path
-        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
+        self.run_query('''CREATE TABLE IF NOT EXISTS transactions
                             (item_num INTEGER,
                             amount REAL,
                             category TEXT,
@@ -26,7 +29,7 @@ class Transaction:
         Returns:
             list: A list of dictionaries representing the transactions.
         """
-        return self.runQuery('''SELECT * FROM transactions''',())
+        return self.run_query('''SELECT * FROM transactions''',())
 
     def add_transaction(self, item):
         """
@@ -38,7 +41,7 @@ class Transaction:
         Returns:
             list: A list of dictionaries representing the transactions.
         """
-        return self.runQuery('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(
+        return self.run_query('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(
             item['item_num'],item['amount'],
             item['category'],item['date'],item['description']))
 
@@ -49,7 +52,7 @@ class Transaction:
         Args:
             item_num (int): The item number of the transaction to delete.
         """
-        return self.runQuery('''DELETE FROM transactions WHERE item_num=?''', (item_num,))
+        return self.run_query('''DELETE FROM transactions WHERE item_num=?''', (item_num,))
 
     def summarize_transaction_by_date(self):
         """
@@ -102,13 +105,13 @@ class Transaction:
         Returns:
             list: A list of dictionaries representing the summarized transactions.
         """
-        return self.runQuery('''SELECT * FROM transactions GROUP BY category''',())
+        return self.run_query('''SELECT * FROM transactions GROUP BY category''',())
 
-    def runQuery(self,query,tuple):
+    def run_query(self,query,temp_tuple):
         ''' return all of the uncompleted tasks as a list of dicts.'''
         con = sqlite3.connect(self.db_path)
         cur = con.cursor()
-        cur.execute(query,tuple)
+        cur.execute(query,temp_tuple)
         tuples = cur.fetchall()
         con.commit()
         con.close()
@@ -151,5 +154,3 @@ def tuples_to_dicts(trans):
               - description: str, the description of the transaction
     """
     return [to_dict(tran) for tran in trans]
-
-
