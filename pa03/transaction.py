@@ -38,8 +38,9 @@ class Transaction:
         Returns:
             list: A list of dictionaries representing the transactions.
         """
-        return self.runQuery('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(item['item_num'],item['amount'],
-        item['category'],item['date'],item['description']))
+        return self.runQuery('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(
+            item['item_num'],item['amount'],
+            item['category'],item['date'],item['description']))
 
     def delete_transaction(self, item_num):
         """
@@ -129,7 +130,8 @@ def to_dict(tran):
               - date: str, the date of the transaction in the format YYYY-MM-DD
               - description: str, the description of the transaction
     """
-    transaction = {'item_num': tran[0], 'amount': tran[1], 'category': tran[2], 'date': tran[3], 'description': tran[4]}
+    transaction = {'item_num': tran[0], 'amount': tran[1], 
+                   'category': tran[2], 'date': tran[3], 'description': tran[4]}
     return transaction
 
 def tuples_to_dicts(trans):
