@@ -1,7 +1,12 @@
+"""
+This module implements a command-line interface for a transaction tracker.
+"""
 from transaction import Transaction
-import sys
 
 def show_menu():
+    """
+    Displays the menu of options for the user.
+    """
     print("0. quit")
     print("1. show categories")
     print("2. add category")
@@ -16,14 +21,17 @@ def show_menu():
     print("11. print this menu")
 
 def main():
+    """
+    Runs the main program loop for the transaction tracker.
+    """
     transaction = Transaction('transactions.db')
     print("Here are some options about transaction tracker:")
     show_menu()
     choice = input("Enter an option: ")
     while True:
         if choice == "0":
-            break     
-        elif choice == "1":
+            break
+        if choice == "1":
             print()
         elif choice == "2":
             print()
@@ -45,18 +53,18 @@ def main():
             transaction.delete_transaction(transaction_id)
         elif choice == "7":
             transactions = transaction.summarize_transaction_by_date()
-            for t in transactions:
-                print(f"{t['date']}: {t['total_amount']}")
+            for trans in transactions:
+                print(f"{trans['date']}: {trans['total_amount']}")
         elif choice == "8":
             month_summary = transaction.summarize_transaction_by_month()
-            for r in month_summary:
-                print(f"{r['date']}: {r['total_amount']}")
+            for trans in month_summary:
+                print(f"{trans['date']}: {trans['total_amount']}")
         elif choice == "9":
             year_summary = transaction.summarize_transaction_by_year()
-            for r in year_summary:
-                print(f"{r['date']}: {r['total_amount']}")
+            for trans in year_summary:
+                print(f"{trans['date']}: {trans['total_amount']}")
         elif choice == "10":
-            summary = transaction.summarize_by_category()
+            transaction.summarize_by_category()
             print("Summarize by category: ")
         elif choice == "11":
             show_menu()
