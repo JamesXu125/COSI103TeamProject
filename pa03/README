@@ -1,5 +1,6 @@
 Jobs done individually:
 	Ao Chan: Finishing the framework of transaction.py and the summarize_by_category feature and its pytest.
+	Ziming Xu: Finishing get_all_transactions method and add_transaction method and wrote according pytests.
 
 
 
@@ -20,4 +21,18 @@ test_transaction.py::test_summarize_transaction_by_year PASSED           [ 85%]
 test_transaction.py::test_summarize_transaction_by_month PASSED          [100%]
 
 ============================== 7 passed in 0.10s ===============================
+
+
+Pylint:
+(cosi103) zimings-mbp:pa03 jamesxu$ pylint tracker.py
+************* Module tracker
+tracker.py:23:0: R0912: Too many branches (17/12) (too-many-branches)
+
+------------------------------------------------------------------
+Your code has been rated at 9.84/10 (previous run: 9.84/10, +0.00)
+
+(cosi103) zimings-mbp:pa03 jamesxu$ pylint transaction.py
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
 
