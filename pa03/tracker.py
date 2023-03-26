@@ -64,8 +64,9 @@ def main():
             for trans in year_summary:
                 print(f"{trans['date']}: {trans['total_amount']}")
         elif choice == "10":
-            transaction.summarize_by_category()
+            summary = transaction.summarize_by_category()
             print("Summarize by category: ")
+            print(summary)
         elif choice == "11":
             show_menu()
         else:
