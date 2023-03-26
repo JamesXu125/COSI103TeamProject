@@ -42,12 +42,14 @@ def transactions(transaction_path, tuples):
     cur.execute('''drop table transactions''')
     con.commit()
 
+# test for the get all transactions method (method4) --Ziming
 def test_getAll(transactions, returned_dicts):
     tc = transactions
     results = tc.get_all_transactions()
     expected = returned_dicts
     assert results == expected
 
+# test for the add transaction method (method5) --Ziming 
 def test_add(transactions, tuples):
     tc = transactions
     test_tuple = tuples
