@@ -109,8 +109,38 @@ class Transaction:
         return tuples_to_dicts(tuples)
 
 def to_dict(tran):
+    """
+    Converts a transaction tuple to a dictionary.
+
+    Args:
+        tran (tuple): A tuple representing a transaction with the following format:
+                      (item_num, amount, category, date, description)
+
+    Returns:
+        dict: A dictionary representing the transaction with the following keys:
+              - item_num: int, the item number of the transaction
+              - amount: float, the amount of the transaction
+              - category: str, the category of the transaction
+              - date: str, the date of the transaction in the format YYYY-MM-DD
+              - description: str, the description of the transaction
+    """
     transaction = {'item_num': tran[0], 'amount': tran[1], 'category': tran[2], 'date': tran[3], 'description': tran[4]}
     return transaction
 
 def tuples_to_dicts(trans):
+    """
+    Converts a list of transaction tuples to a list of transaction dictionaries.
+
+    Args:
+        trans (list): A list of tuples representing transactions with the following format:
+                      [(item_num, amount, category, date, description), ...]
+
+    Returns:
+        list: A list of dictionaries representing the transactions with the following keys:
+              - item_num: int, the item number of the transaction
+              - amount: float, the amount of the transaction
+              - category: str, the category of the transaction
+              - date: str, the date of the transaction in the format YYYY-MM-DD
+              - description: str, the description of the transaction
+    """
     return [to_dict(tran) for tran in trans]
