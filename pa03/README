@@ -1,0 +1,23 @@
+Jobs done individually:
+	Ao Chan: Finishing the framework of transaction.py and the summarize_by_category feature and its pytest.
+
+
+
+Pytest:
+============================= test session starts ==============================
+platform darwin -- Python 3.9.7, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /opt/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/macbook/Desktop/COSI103TeamProject/pa03
+plugins: anyio-2.2.0
+collected 7 items                                                              
+
+test_transaction.py::test_getAll PASSED                                  [ 14%]
+test_transaction.py::test_add PASSED                                     [ 28%]
+test_transaction.py::test_summarize_by_category PASSED                   [ 42%]
+test_transaction.py::test_delete_transaction PASSED                      [ 57%]
+test_transaction.py::test_summarize_by_date PASSED                       [ 71%]
+test_transaction.py::test_summarize_transaction_by_year PASSED           [ 85%]
+test_transaction.py::test_summarize_transaction_by_month PASSED          [100%]
+
+============================== 7 passed in 0.10s ===============================
+
