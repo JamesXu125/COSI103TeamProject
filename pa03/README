@@ -2,6 +2,7 @@ Jobs done individually:
 	Ao Chan: Finishing the framework of transaction.py and the summarize_by_category feature and its pytest.
 	Ziming Xu: Finishing get_all_transactions method and add_transaction method and wrote according pytests.
 	Hang Liao: Finish delete_transaction and summarize_transactions_by_date method and wrote according pytests. 
+	Bohan Lin: Setting up data and database in test_transaction.py file. Finishing "quit" and "show the menu" method in transaction.py
 
 
 
